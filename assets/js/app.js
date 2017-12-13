@@ -25,21 +25,22 @@ $(document).ready(function () {
 
     // Object for Q&A's
     var trivia = [{
-        question: "",
-        answers: ["", "", "", ""],
-        right: ""
+        question: "According to the Pulp Fiction, what is a Quarter Pounder called in Europe?",
+        answers: ["Big Mac", "Royale with Cheese", "Pound-Quatre", "Le Burger-Fromage"],
+        right: "Royale with Cheese"
     }, {
-        question: "",
-        answers: ["", "", "", ""],
-        right: ""
+        question: "What was the name of the restaurant where Vincent took Mia out to dinner?",
+        answers: ["Jimmy's Chicken Shack", "Hawthorne Grille", "Chelsea's Palace", "Jackrabbit Slim's"],
+        right: "Jackrabbit Slim's"
     }, {
-        question: "",
-        answers: ["", "", "", ""],
-        right: ""
+        question: "In what round does Marcellus tell Butch to take a dive during the fight?",
+        answers: ["Sixth", "First", "Fourth", "Fifth"],
+        right: "Fifth"
     }, {
-        question: "",
-        answers: ["", "", "", ""],
-        right: ""
+        question: "In the beginning of the film, where did Brad get the burger that Jules took a bite of?",
+        answers: ["Luscious Lil's", "Big Kahuna", "Carl's Jr", "Jack in the Box"],
+        right: "Big Kahuna"
     }];
+    console.log(trivia);
 
 })
