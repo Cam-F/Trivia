@@ -1,7 +1,7 @@
 /*  Saw this style of pseudo online, found it appealing
 
-1. []   Setup globals: Time, Right Answers, Wrong Answers (maybe more)
-2. []   Setup array object pulpTrivia = [
+1. [X]   Setup globals: Time, Right Answers, Wrong Answers (maybe more)
+2. [x]   Setup array object pulpTrivia = [
             question: "",
             answers: ["","","",""],
             right: ""]
@@ -14,3 +14,32 @@
 
 */
 
+$(document).ready(function () {
+
+    // Globals
+    var time = 25;      // time to answer
+    var rightAnswer = 0;      // right answers
+    var wrongAnswer = 0;      // wrong answers
+    var count = -1;     // to cycle through the images
+    var intervalID;     // for setInterval timing
+
+    // Object for Q&A's
+    var trivia = [{
+        question: "",
+        answers: ["", "", "", ""],
+        right: ""
+    }, {
+        question: "",
+        answers: ["", "", "", ""],
+        right: ""
+    }, {
+        question: "",
+        answers: ["", "", "", ""],
+        right: ""
+    }, {
+        question: "",
+        answers: ["", "", "", ""],
+        right: ""
+    }];
+
+})
