@@ -114,6 +114,7 @@ $(document).ready(function () {
                 $(".answer").html(results);
             }
             score();                                            // HOLY **** JUST CALL THE FUNCTION DUH
+            reset();
         }
 
 
@@ -150,6 +151,32 @@ $(document).ready(function () {
                 console.log(rightAnswer);
                 console.log(wrongAnswer);
             })
+        }
+
+        // reset
+
+        function reset() {
+            var reset = $(document.createElement("button"));               // dynamically added a button
+            reset.addClass("btn-lg btn-block");                            // consistent styling
+            reset.text("Play Again");
+
+            $(".answer").append(reset);                                     // added to the DOM
+
+            reset.on("click", function () {
+                count = -1;                                                 // reset our navigator
+                rightAnswer = 0;                                            // reset our stats
+                wrongAnswer = 0;
+
+                reset.remove();                                             // removing our button
+
+                nextQuestion();                                             // Restarting game
+            })
+        }
+
+        // Transition GIF's
+
+        function rightGif() {
+            
         }
     }
 })
