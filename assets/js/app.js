@@ -6,27 +6,28 @@
             answers: ["","","",""],
             right: ""]
     2a. [x] Setup array for gifs dependent on answer
-3. []   Setup timer (setInterval or setTimeout)
-4. []   Setup .click on answers array
-5. []   ++Right Answers
-6. []   ++Wrong Answers
-7. []   Show score
-8. []   Reset
+3. [x]   Setup timer (setInterval or setTimeout)
+4. []   Setup function to display next question/answers
+5. []   Setup .click on answers array
+6. []   ++Right Answers
+7. []   ++Wrong Answers
+8. []   Show score
+9. []   Reset
 
 */
 
 $(document).ready(function () {
 
     // Globals
-    var time = 25;      // time to answer
+    var time = 25;            // time to answer
     var rightAnswer = 0;      // right answers
     var wrongAnswer = 0;      // wrong answers
-    var count = -1;     // to cycle through the images
-    var intervalID;     // for setInterval timing
+    var count = -1;           // to cycle through the questions/answers/gifs. Its set to -1 so it gets the index of [0] first
+    var intervalID;           // for setInterval timing
 
     // Object for Q&A's
     var trivia = [{
-        question: "According to the Pulp Fiction, what is a Quarter Pounder called in Europe?",
+        question: "According to Pulp Fiction, what is a Quarter Pounder called in Europe?",
         answers: ["Big Mac", "Royale with Cheese", "Pound-Quatre", "Le Burger-Fromage"],
         right: "Royale with Cheese"
     }, {
@@ -54,7 +55,7 @@ $(document).ready(function () {
     function startGame() {
         var gameStart = $(".question");                             // grabbing the question element to append to later
         var beginButton = $(document.createElement("button"));      // dynamically create start button
-        beginButton.addClass("btn-lg begin-button");                 // adding classes to new button
+        beginButton.addClass("btn-lg btn-block begin-button");                 // adding classes to new button
 
         beginButton = beginButton.html("Start Trivia Quiz");        // put text on the button
 
@@ -63,6 +64,7 @@ $(document).ready(function () {
         $(".begin-button").click(function () {                         // on click function
             beginButton.remove();                                   // removing the start quiz button
             nextQuestion();                                         // calling the next question
+            timer();
         })
     }
     // Timer function
@@ -73,9 +75,20 @@ $(document).ready(function () {
 
         if (time === 0) {                           // IF the user runs out of time
             wrongAnswer++;                          // add 1 to the wrong answer
-            clearInterval(intervalID);              // clear the setInterval
+            clearInterval(intervalID);              // clear the setInterval    NOT SURE IF THIS IS NEEDED
             nextQuestion();                         // Call next question      REMEMBER TO NAME QUESTION FUNCTION THIS
         }
     }
+    // Function for calling questions
+    function nextQuestion() {
+        count++;                                    // Increase count by 1 to cycle through questions 
+        time = 25;                                  // Timer set to 25
+        intervalID = setInterval(timer, 1000);      // Run the timer function every 1 second
 
+        if (count < trivia.length) {
+            $(".question").text(trivia[count].question);     // displays the question property at the current index of var count in trivia object
+
+            $(".answer").text(trivia[count].answers);        // LOL get these to display on buttons
+        }
+    }
 })
