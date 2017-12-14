@@ -98,38 +98,58 @@ $(document).ready(function () {
             $(".answer").empty();                           // Need .empty() or they all append to the page
             nextAnswers();
         }
-    }
+        // Clearing divs once all questions have been answered
+        else if (count > (trivia.length - 1)) {              // Clear all div's once count exceeds 3
 
-    // Function for calling answers
+            $(".timer").empty();
+            $(".question").empty();
+            $(".answer").empty();
+            clearInterval(intervalID);
 
-    function nextAnswers() {
-        for (i = 0; i < trivia[count].answers.length; i++) {
-            var button = $(document.createElement("button"));               // dynamically creates 4 buttons
-            button.addClass("btn-lg btn-block answer-button");              // added the same classes for consistent look
+            function score() {
+                var gameEnd = "<h1>Game Over! </h1>"            // Assign new var 
+                $(".question").html(gameEnd);                   // 
 
-            var answerButton = button.html(trivia[count].answers[i]);       // utiliizing [count] to get into the [answers] property, and indexof to get each answer
-            $(".answer").append(answerButton);                              // appending the 4 answer buttons
+                var results = "Right answers: " + rightAnswer + " Wrong answers: " + wrongAnswer;
+                $(".answer").html(results);
+            }
+            score();                                            // HOLY **** JUST CALL THE FUNCTION DUH
         }
 
-        // Function for click capturing 
 
-        $(".answer-button").on("click", function (event) {
+        // Function for calling answers
 
-            userGuess = $(this).text();                                     // Redefining empty var to the string on the button clicked
-            console.log(userGuess);
+        function nextAnswers() {
+            for (i = 0; i < trivia[count].answers.length; i++) {
+                var button = $(document.createElement("button"));               // dynamically creates 4 buttons
+                button.addClass("btn-lg btn-block answer-button");              // added the same classes for consistent look
 
-            if (userGuess === trivia[count].right) {
-                rightAnswer++;
-                // right gif function
-                clearInterval(intervalID);
-                nextQuestion();
+                var answerButton = button.html(trivia[count].answers[i]);       // utiliizing [count] to get into the [answers] property, and indexof to get each answer
+                $(".answer").append(answerButton);                              // appending the 4 answer buttons
             }
-            else {
-                wrongAnswer++;
-                // wrong gif function
-                clearInterval(intervalID);
-                nextQuestion();
-            }
-        })
+
+            // Function for click capturing 
+
+            $(".answer-button").on("click", function (event) {
+
+                userGuess = $(this).text();                                     // Redefining empty var to the string on the button clicked
+                console.log(userGuess);
+
+                if (userGuess === trivia[count].right) {                        // comparing click to [right] "string"
+                    rightAnswer++;                                              // awarding a point
+                    // right gif function
+                    clearInterval(intervalID);                                  // reset timer
+                    nextQuestion();                                             // call next question
+                }
+                else {
+                    wrongAnswer++;
+                    // wrong gif function
+                    clearInterval(intervalID);
+                    nextQuestion();
+                }
+                console.log(rightAnswer);
+                console.log(wrongAnswer);
+            })
+        }
     }
 })
