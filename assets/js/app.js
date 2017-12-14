@@ -8,18 +8,18 @@
     2a. [x] Setup array for gifs dependent on answer
 3. [x]   Setup timer (setInterval or setTimeout)
 4. [x]   Setup function to display next question/answers
-5. []   Setup .click on answers array
-6. []   ++Right Answers
-7. []   ++Wrong Answers
-8. []   Show score
-9. []   Reset
-
+5. [x]   Setup .click on answers array
+6. [x]   ++Right Answers
+7. [x]   ++Wrong Answers
+8. [x]   Show score
+9. [x]   Reset
+10. []  Figure out how to only show gifs in between
 */
 
 $(document).ready(function () {
 
     // Globals
-    var time = 25;            // time to answer
+    var time = 20;            // time to answer
     var rightAnswer = 0;      // right answers
     var wrongAnswer = 0;      // wrong answers
     var count = -1;           // to cycle through the questions/answers/gifs. Its set to -1 so it gets the index of [0] first
@@ -89,7 +89,7 @@ $(document).ready(function () {
 
     function nextQuestion() {
         count++;                                            // Increase count by 1 to cycle through questions 
-        time = 5;                                           // Timer set to 25
+        time = 20;                                           // Timer set to 25
         intervalID = setInterval(timer, 1000);              // Run the timer function every 1 second
 
         if (count < trivia.length) {
@@ -135,18 +135,20 @@ $(document).ready(function () {
 
                 userGuess = $(this).text();                                     // Redefining empty var to the string on the button clicked
                 console.log(userGuess);
+                
+                $(".answer-button").remove();                                    // Clear out the answer choices for clean presentation of the gif
+                $(".question").empty();                                          // MAJOR KEY THESE 3 LINES
+                $(".timer").empty();                                             // I DID IT TIME GO DIE NOW
 
                 if (userGuess === trivia[count].right) {                        // comparing click to [right] "string"
                     rightAnswer++;                                              // awarding a point
-                    // right gif function
+                    rightGif();                                                 // Call transition gif
                     clearInterval(intervalID);                                  // reset timer
-                    nextQuestion();                                             // call next question
                 }
                 else {
-                    wrongAnswer++;
-                    // wrong gif function
-                    clearInterval(intervalID);
-                    nextQuestion();
+                    wrongAnswer++;                                              // adding 1 to wrong
+                    wrongGif();                                                 // call transition gif
+                    clearInterval(intervalID);                                  // reset timer
                 }
                 console.log(rightAnswer);
                 console.log(wrongAnswer);
@@ -176,7 +178,17 @@ $(document).ready(function () {
         // Transition GIF's
 
         function rightGif() {
-            
+            $(".gif").html("<img src=" + rightAnswerImg[count] + " width='400px'><h2>You're correct!</h2>");
+            setTimeout(removeGif, 4000);
+
+        }
+        function wrongGif() {
+            $(".gif").html("<img src=" + wrongAnswerImg[count] + " width='400px'><h2>Incorrect: " + trivia[count].right + "</h2>");
+            setTimeout(removeGif, 4000);
+        }
+        function removeGif() {
+            $(".gif").empty();
+            nextQuestion();
         }
     }
 })
