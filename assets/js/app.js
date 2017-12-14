@@ -65,5 +65,17 @@ $(document).ready(function () {
             nextQuestion();                                         // calling the next question
         })
     }
+    // Timer function
+    function timer() {
+        time--;                                     // decreasing from 25 by 1
+
+        $(".timer").html(time + " Remaining");      // Displays time on screen
+
+        if (time === 0) {                           // IF the user runs out of time
+            wrongAnswer++;                          // add 1 to the wrong answer
+            clearInterval(intervalID);              // clear the setInterval
+            nextQuestion();                         // Call next question      REMEMBER TO NAME QUESTION FUNCTION THIS
+        }
+    }
 
 })
