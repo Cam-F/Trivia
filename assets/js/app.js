@@ -43,10 +43,27 @@ $(document).ready(function () {
         right: "Big Kahuna"
     }];
     console.log(trivia);
-    
+
     // Arrays for GIF's
 
     var rightAnswerImg = ["assets/images/right1.gif", "assets/images/right2.gif", "assets/images/right3.gif", "assets/images/right4.gif"];
     var wrongAnswerImg = ["assets/images/wrong1.gif", "assets/images/wrong2.gif", "assets/images/wrong3.gif", "assets/images/wrong4.gif"];
+
+    startGame();
+    // Start game
+    function startGame() {
+        var gameStart = $(".question");                             // grabbing the question element to append to later
+        var beginButton = $(document.createElement("button"));      // dynamically create start button
+        beginButton.addClass("btn-lg begin-button");                 // adding classes to new button
+
+        beginButton = beginButton.html("Start Trivia Quiz");        // put text on the button
+
+        gameStart.append(beginButton);                              // appending the start button to the div
+
+        $(".begin-button").click(function () {                         // on click function
+            beginButton.remove();                                   // removing the start quiz button
+            nextQuestion();                                         // calling the next question
+        })
+    }
 
 })
