@@ -7,7 +7,7 @@
             right: ""]
     2a. [x] Setup array for gifs dependent on answer
 3. [x]   Setup timer (setInterval or setTimeout)
-4. []   Setup function to display next question/answers
+4. [x]   Setup function to display next question/answers
 5. []   Setup .click on answers array
 6. []   ++Right Answers
 7. []   ++Wrong Answers
@@ -24,6 +24,7 @@ $(document).ready(function () {
     var wrongAnswer = 0;      // wrong answers
     var count = -1;           // to cycle through the questions/answers/gifs. Its set to -1 so it gets the index of [0] first
     var intervalID;           // for setInterval timing
+    var userGuess;            // User guess answer, empty for storing a value after click
 
     // Object for Q&A's
     var trivia = [{
@@ -51,23 +52,27 @@ $(document).ready(function () {
     var wrongAnswerImg = ["assets/images/wrong1.gif", "assets/images/wrong2.gif", "assets/images/wrong3.gif", "assets/images/wrong4.gif"];
 
     startGame();
+
     // Start game
+
     function startGame() {
         var gameStart = $(".question");                             // grabbing the question element to append to later
         var beginButton = $(document.createElement("button"));      // dynamically create start button
-        beginButton.addClass("btn-lg btn-block begin-button");                 // adding classes to new button
+        beginButton.addClass("btn-lg btn-block begin-button");      // adding classes to new button
 
         beginButton = beginButton.html("Start Trivia Quiz");        // put text on the button
 
         gameStart.append(beginButton);                              // appending the start button to the div
 
-        $(".begin-button").click(function () {                         // on click function
+        $(".begin-button").click(function () {                      // on click function
             beginButton.remove();                                   // removing the start quiz button
             nextQuestion();                                         // calling the next question
             timer();
         })
     }
+
     // Timer function
+
     function timer() {
         time--;                                     // decreasing from 25 by 1
 
@@ -79,16 +84,52 @@ $(document).ready(function () {
             nextQuestion();                         // Call next question      REMEMBER TO NAME QUESTION FUNCTION THIS
         }
     }
+
     // Function for calling questions
+
     function nextQuestion() {
-        count++;                                    // Increase count by 1 to cycle through questions 
-        time = 25;                                  // Timer set to 25
-        intervalID = setInterval(timer, 1000);      // Run the timer function every 1 second
+        count++;                                            // Increase count by 1 to cycle through questions 
+        time = 5;                                           // Timer set to 25
+        intervalID = setInterval(timer, 1000);              // Run the timer function every 1 second
 
         if (count < trivia.length) {
-            $(".question").text(trivia[count].question);     // displays the question property at the current index of var count in trivia object
+            $(".question").text(trivia[count].question);    // displays the question property at the current index of var count in trivia object
 
-            $(".answer").text(trivia[count].answers);        // LOL get these to display on buttons
+            $(".answer").empty();                           // Need .empty() or they all append to the page
+            nextAnswers();
         }
+    }
+
+    // Function for calling answers
+
+    function nextAnswers() {
+        for (i = 0; i < trivia[count].answers.length; i++) {
+            var button = $(document.createElement("button"));               // dynamically creates 4 buttons
+            button.addClass("btn-lg btn-block answer-button");              // added the same classes for consistent look
+
+            var answerButton = button.html(trivia[count].answers[i]);       // utiliizing [count] to get into the [answers] property, and indexof to get each answer
+            $(".answer").append(answerButton);                              // appending the 4 answer buttons
+        }
+
+        // Function for click capturing 
+
+        $(".answer-button").on("click", function (event) {
+
+            userGuess = $(this).text();                                     // Redefining empty var to the string on the button clicked
+            console.log(userGuess);
+
+            if (userGuess === trivia[count].right) {
+                rightAnswer++;
+                // right gif function
+                clearInterval(intervalID);
+                nextQuestion();
+            }
+            else {
+                wrongAnswer++;
+                // wrong gif function
+                clearInterval(intervalID);
+                nextQuestion();
+            }
+        })
     }
 })
