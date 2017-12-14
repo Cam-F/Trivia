@@ -5,6 +5,7 @@
             question: "",
             answers: ["","","",""],
             right: ""]
+    2a. [x] Setup array for gifs dependent on answer
 3. []   Setup timer (setInterval or setTimeout)
 4. []   Setup .click on answers array
 5. []   ++Right Answers
@@ -37,10 +38,15 @@ $(document).ready(function () {
         answers: ["Sixth", "First", "Fourth", "Fifth"],
         right: "Fifth"
     }, {
-        question: "In the beginning of the film, where did Brad get the burger that Jules took a bite of?",
+        question: "In the beginning of the film, where did Brett get the burger that Jules took a bite of?",
         answers: ["Luscious Lil's", "Big Kahuna", "Carl's Jr", "Jack in the Box"],
         right: "Big Kahuna"
     }];
     console.log(trivia);
+    
+    // Arrays for GIF's
+
+    var rightAnswerImg = ["assets/images/right1.gif", "assets/images/right2.gif", "assets/images/right3.gif", "assets/images/right4.gif"];
+    var wrongAnswerImg = ["assets/images/wrong1.gif", "assets/images/wrong2.gif", "assets/images/wrong3.gif", "assets/images/wrong4.gif"];
 
 })
