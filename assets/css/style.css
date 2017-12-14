@@ -1,0 +1,50 @@
+body {
+    background-image: url("../images/bg.jpg");
+    background-color: black;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right bottom;
+    background-size: 40%;
+}
+
+.container {
+    width: 50%;
+    height: 100%;
+}
+
+.jumbotron {
+    background: #e7343a;
+    color: #ffd900;
+    font-size: 30px;
+    padding: 1%;
+}
+
+h1 {
+    font-family: 'Alfa Slab One', cursive;
+}
+
+.gif {
+    color: #e5a300;
+}
+
+.timer {
+    color: #e5a300; 
+    padding: 4%;
+    font-size: 20px;
+}
+
+.question {
+    color: #e5a300;
+    padding: 4%;
+    font-size: 24px;
+}
+
+button {
+    background: rgb(44, 44, 44);
+    color: white;
+}
+
+h2 {
+    font-family: 'Alfa Slab One', cursive;
+    color: #e5a300;   
+}

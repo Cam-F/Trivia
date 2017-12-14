@@ -56,7 +56,7 @@ $(document).ready(function () {
     // Start game
 
     function startGame() {
-        var gameStart = $(".question");                             // grabbing the question element to append to later
+        var gameStart = $(".answer");                             // grabbing the question element to append to later
         var beginButton = $(document.createElement("button"));      // dynamically create start button
         beginButton.addClass("btn-lg btn-block begin-button");      // adding classes to new button
 
@@ -110,7 +110,7 @@ $(document).ready(function () {
                 var gameEnd = "<h1>Game Over! </h1>"            // Assign new var 
                 $(".question").html(gameEnd);                   // 
 
-                var results = "Right answers: " + rightAnswer + " Wrong answers: " + wrongAnswer;
+                var results = "<h2>Right answers: " + rightAnswer + " Wrong answers: " + wrongAnswer + "</h2>";
                 $(".answer").html(results);
             }
             score();                                            // HOLY **** JUST CALL THE FUNCTION DUH
